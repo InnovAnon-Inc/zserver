@@ -1,7 +1,8 @@
 FROM innovanon/zandronum as builder
 RUN sleep 127                    \
  && apt update                   \
- && apt install zandronum-server
+ && apt install zandronum-server \
+                zandronum-pk3
 # TODO apt remove ...
 
 #RUN           tar  cf /tmp/squash.tar     \
@@ -42,6 +43,7 @@ EXPOSE 10667
 ENTRYPOINT ["/usr/bin/zandronum-server", "-host", "-port", "10667"]
 CMD        ["-iwad",   "/home/zandronum/.config/zandronum/freedoom2.wad",     \
             "-waddir", "/home/zandronum/.config/zandronum",                   \
+            "-file",   "/home/zandronum/.config/zandronum/brutalv20b.pk3", \
             "-file",   "/home/zandronum/.config/zandronum/rainbow_blood.pk3", \
             "-file",   "/home/zandronum/.config/zandronum/latest.wad",        \
             "+exec",   "/home/zandronum/.config/zandronum/default.cfg"]
